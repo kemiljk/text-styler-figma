@@ -1,9 +1,5 @@
 const { selection } = figma.currentPage;
 
-function clone(val) {
-  return JSON.parse(JSON.stringify(val));
-}
-
 selection.forEach(async (textNode): Promise<string> => {
   if (textNode.type === "TEXT") {
     await figma.loadFontAsync(textNode.fontName as FontName);
