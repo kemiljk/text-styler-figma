@@ -1,13 +1,9 @@
 const { selection } = figma.currentPage;
-function clone(val) {
-    return JSON.parse(JSON.stringify(val));
-}
 selection.forEach(async (textNode) => {
     if (textNode.type === "TEXT") {
         await figma.loadFontAsync(textNode.fontName);
         const makeTextStyle = figma.createTextStyle();
         let textStyle = textNode.fontName;
-        // figma.notify(textStyle.family + " " + textStyle.style);
         if (textNode.fontName !== figma.mixed) {
             makeTextStyle.fontName = {
                 family: textStyle.family,
@@ -33,6 +29,6 @@ selection.forEach(async (textNode) => {
         makeTextStyle.fontSize =
             textNode.fontSize !== figma.mixed ? textNode.fontSize : null;
     }
-    Promise.resolve("Done").then((msg) => figma.closePlugin(msg));
+    Promise.resolve("Done").then(() => figma.closePlugin());
     return;
 });

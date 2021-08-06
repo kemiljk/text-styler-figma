@@ -5,11 +5,10 @@ selection.forEach(async (textNode): Promise<string> => {
     await figma.loadFontAsync(textNode.fontName as FontName);
     const makeTextStyle = figma.createTextStyle();
     let textStyle = textNode.fontName;
-    // figma.notify(textStyle.family + " " + textStyle.style);
     if (textNode.fontName !== figma.mixed) {
       makeTextStyle.fontName = {
-        family: textStyle.family,
-        style: textStyle.style,
+        family: (textStyle as FontName).family,
+        style: (textStyle as FontName).style,
       };
       figma.notify(`${selection.length} Text Styles created`);
     }
